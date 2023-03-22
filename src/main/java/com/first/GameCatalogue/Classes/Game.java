@@ -22,13 +22,24 @@ public class Game {
     private String name;
     private int price;
     private int YearOfRelease;
-    private int GenreId;
-    private int ComoanyId;
+    @Embedded
+    @AttributeOverrides({
+            @AttributeOverride( name = "name", column = @Column(name = "engine_name")),
+            @AttributeOverride(name = "version", column = @Column(name = "engine_version")),
+            @AttributeOverride(name = "type", column = @Column(name = "engine_type"))
+    })
+    private Engine engine;
+
 
     @ManyToMany(mappedBy = "games")
     private Set<Genre> genre=new HashSet<>();
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="Company_Id", referencedColumnName = "companyId")
+    private Company company;
 
+    @OneToOne(mappedBy = "game")
+    private Rating rating;
 
     public Game() {
     }
@@ -39,6 +50,13 @@ public class Game {
 
     public void setGameId(Long gameId) {
         this.gameId = gameId;
+    }
+
+    public Game(String name, int price, int yearOfRelease, Engine engine) {
+        this.name = name;
+        this.price = price;
+        YearOfRelease = yearOfRelease;
+        this.engine=engine;
     }
 
     public String getName() {
@@ -65,16 +83,19 @@ public class Game {
         YearOfRelease = yearOfRelease;
     }
 
-    public Game(String name, int price, int yearOfRelease) {
-        this.name = name;
-        this.price = price;
-        YearOfRelease = yearOfRelease;
-    }
-
-
-
     public Set<Genre> getGenre() {
         return genre;
     }
 
+    public Company getCompany() {
+        return company;
+    }
+
+    public Engine getEngine() {
+        return engine;
+    }
+
+    public void setEngine(Engine engine) {
+        this.engine = engine;
+    }
 }

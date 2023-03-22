@@ -1,6 +1,10 @@
 package com.first.GameCatalogue.Classes;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table
@@ -18,6 +22,11 @@ public class Company {
     private Long companyId;
     private String name;
     private String country;
+    @JsonIgnore
+    @OneToMany(mappedBy = "company")
+    private Set<Game> games= new HashSet<>();
+
+
 
     public Company() {
     }
@@ -58,5 +67,9 @@ public class Company {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public Set<Game> getGames() {
+        return games;
     }
 }

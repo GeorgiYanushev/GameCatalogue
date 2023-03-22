@@ -2,9 +2,8 @@ package com.first.GameCatalogue.Controllers;
 
 import com.first.GameCatalogue.Services.RatingService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 import com.first.GameCatalogue.Classes.Rating;
 @RestController
@@ -20,7 +19,22 @@ public class RatingController {
     @GetMapping
     public List<Rating> getRatings(){
        return ratingService.getRatings();
-
+    }
+    @PostMapping
+    public void registerNewRating(@RequestBody Rating rating){
+        ratingService.addNewRating(rating);
+    }
+    @DeleteMapping(path = "{ratingId}")
+    public void deleteRating(@PathVariable("ratingId") Long id){
+        ratingService.deleteStudent(id);
+    }
+    @PutMapping(path = "{ratingId}")
+    public void updateStudent(
+            @PathVariable("ratingId") Long ratingId,
+            @RequestParam(required = false) Integer numbOfReviews,
+            @RequestParam(required = false) Integer score){
+        ratingService.updateRating(ratingId,numbOfReviews,score);
+        System.out.println(ratingId+" "+numbOfReviews+"  "+ score);
     }
 
 }

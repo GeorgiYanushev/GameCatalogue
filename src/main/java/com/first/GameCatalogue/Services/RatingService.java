@@ -1,10 +1,12 @@
 package com.first.GameCatalogue.Services;
 
 import com.first.GameCatalogue.Repositories.RatingRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.first.GameCatalogue.Classes.Rating;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RatingService {
@@ -20,4 +22,17 @@ public class RatingService {
         return ratingRepository.findAll();
     }
 
+    public void addNewRating(Rating rating) {
+        ratingRepository.save(rating);
+    }
+
+    public void deleteStudent(Long id) {
+        ratingRepository.deleteById(id);
+    }
+    @Transactional
+    public void updateRating(Long ratingId, Integer numbOfReviews, Integer score) {
+        Rating rating=ratingRepository.getReferenceById(ratingId);
+        if(score!=null)rating.setScore(score);
+        if(numbOfReviews!=null)rating.setNumbOfReviews(numbOfReviews);
+    }
 }

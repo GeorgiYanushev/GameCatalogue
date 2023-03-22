@@ -16,21 +16,25 @@ public class Rating {
             generator ="rating_sequence"
     )
     private Long ratingId;
-    private int numbOfReviews;
-    private double Score;
+    private Integer numbOfReviews;
+    private Integer score;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="game_id", referencedColumnName = "gameId")
+    private Game game;
 
     public Rating() {
     }
 
-    public Rating(int numbOfReviews, int score) {
+    public Rating(Integer numbOfReviews, Integer score) {
         this.numbOfReviews = numbOfReviews;
-        Score = score;
+        this.score = score;
     }
 
-    public Rating(Long ratingId, int numbOfReviews, double score) {
+    public Rating(Long ratingId, Integer numbOfReviews, Integer score) {
         this.ratingId = ratingId;
         this.numbOfReviews = numbOfReviews;
-        Score = score;
+        this.score = score;
     }
 
     public Long getRatingId() {
@@ -41,20 +45,20 @@ public class Rating {
         this.ratingId = ratingId;
     }
 
-    public int getNumbOfReviews() {
+    public Integer getNumbOfReviews() {
         return numbOfReviews;
     }
 
-    public void setNumbOfReviews(int numbOfReviews) {
+    public void setNumbOfReviews(Integer numbOfReviews) {
         this.numbOfReviews = numbOfReviews;
     }
 
-    public double getScore() {
-        return Score;
+    public Integer getScore() {
+        return score;
     }
 
-    public void setScore(double score) {
-        Score = score;
+    public void setScore(Integer score) {
+        this.score = score;
     }
 
     @Override
@@ -62,7 +66,7 @@ public class Rating {
         return "Rating{" +
                 "RatingId=" + ratingId +
                 ", numbOfReviews=" + numbOfReviews +
-                ", Score=" + Score +
+                ", Score=" + score +
                 '}';
     }
 }

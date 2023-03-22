@@ -1,8 +1,9 @@
 package com.first.GameCatalogue.Classes;
 
-public class Engine {
+import jakarta.persistence.Embeddable;
 
-    private int engineId;
+@Embeddable
+public class Engine {
     private String name;
     private double version;
     private String type;
