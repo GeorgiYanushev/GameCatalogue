@@ -31,10 +31,9 @@ public class RatingController {
     @PutMapping(path = "{ratingId}")
     public void updateStudent(
             @PathVariable("ratingId") Long ratingId,
-            @RequestParam(required = false) Integer numbOfReviews,
-            @RequestParam(required = false) Integer score){
-        ratingService.updateRating(ratingId,numbOfReviews,score);
-        System.out.println(ratingId+" "+numbOfReviews+"  "+ score);
+            @RequestBody Rating rating){
+        ratingService.updateRating(ratingId,rating.getNumbOfReviews(), rating.getScore());
+        System.out.println(ratingId+" "+rating.getNumbOfReviews()+"  "+ rating.getScore());
     }
 
 }
