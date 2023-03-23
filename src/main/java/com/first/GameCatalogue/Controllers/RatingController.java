@@ -33,7 +33,6 @@ public class RatingController {
             @PathVariable("ratingId") Long ratingId,
             @RequestBody Rating rating){
         ratingService.updateRating(ratingId,rating.getNumbOfReviews(), rating.getScore());
-        System.out.println(ratingId+" "+rating.getNumbOfReviews()+"  "+ rating.getScore());
     }
 
 }
