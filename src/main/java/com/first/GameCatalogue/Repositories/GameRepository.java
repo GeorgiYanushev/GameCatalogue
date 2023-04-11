@@ -1,6 +1,6 @@
 package com.first.GameCatalogue.Repositories;
 
-import com.first.GameCatalogue.Classes.Game;
+import com.first.GameCatalogue.Models.Game;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,4 +1,4 @@
-package com.first.GameCatalogue.Classes;
+package com.first.GameCatalogue.Models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;

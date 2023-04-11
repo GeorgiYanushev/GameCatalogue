@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import com.first.GameCatalogue.Classes.Rating;
+import com.first.GameCatalogue.Models.Rating;
 @RestController
 @RequestMapping(path = "api/v1/rating")
 public class RatingController {
@@ -24,7 +24,7 @@ public class RatingController {
     public void registerNewRating(@RequestBody Rating rating){
         ratingService.addNewRating(rating);
     }
-    @DeleteMapping(path = "{ratingId}")
+    @DeleteMapping("{ratingId}")
     public void deleteRating(@PathVariable("ratingId") Long id){
         ratingService.deleteStudent(id);
     }
